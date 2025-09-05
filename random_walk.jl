@@ -8,10 +8,7 @@ path_y = zeros(Int, max_distance)
 
 mutable struct Walker
     x::Int
-    y::Int
-    function Walker(a::Int, b::Int)
-        new(a,b)
-    end    
+    y::Int    
 end
 
 function move!(walker::Walker, direction)
@@ -23,7 +20,7 @@ step = rand([-1,1])
     end
 end
 
-@time function path!(walker::Walker, path_x, path_y, max_distance)
+function path!(walker::Walker, path_x, path_y, max_distance)
     path_x[1] = walker.x
     path_y[1] = walker.y
     for i in 2:max_distance
@@ -36,7 +33,7 @@ end
 walker = Walker(0,0)
 path!(walker, path_x, path_y, max_distance)
 
-plot(
+p = plot(
     path_x, 
     path_y, 
     title="Simulação de Passeio Aleatório", 
@@ -46,3 +43,4 @@ plot(
     legend=:topright,
     size=(800, 800)
 )
+savefig(p,"plot.png")
